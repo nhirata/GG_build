@@ -16,19 +16,27 @@ if [ ! -d ${OutputFolder} ]; then
     mkdir ${OutputFolder}
 fi
 
-echo 
+echo "Copying the script file"
 cp $FullflashScript ${OutputFolder}
+
+echo "Copying the b2g folder"
 mkdir ${OutputFolder}/b2g
 cp -R ${Gecko} ${OutputFolder}/
+
+echo "Copying the gaia folder"
 mkdir ${OutputFolder}/gaia
 mkdir ${OutputFolder}/gaia/profile
 mkdir ${OutputFolder}/gaia/profile/prefs
 cp -R ${Gaia} ${OutputFolder}/gaia/profile
+
+echo "Copying the settings folder"
 cp ${User} ${OutputFolder}/gaia/profile
 cp ${Settings} ${OutputFolder}/gaia/profile
 
+echo "zipping the file"
 zip -r ${OutputFolder}.zip ${OutputFolder}
 
+echo "clean up"
 if [ -f ${OutputFolder}.zip]; then
    rm -rf ${OutputFolder}
 fi
